@@ -3,7 +3,7 @@
 Created on Sun Dec  3 02:01:50 2017
 
 """
-
+#test how many joysticks is connected. And check their buttons and axes number.
 import pygame
 
 # Define some colors
