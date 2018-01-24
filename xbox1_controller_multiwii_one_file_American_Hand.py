@@ -171,7 +171,6 @@ if __name__ == "__main__":
     butterfly.disarm()
     
     console_messege_timer_start=0
-    auto_land=0
     
     #log ditionary for recording control signal(optional can be commented)
     control_signal_log={}
@@ -217,19 +216,6 @@ if __name__ == "__main__":
             elif controller.lb:
                 if sensitivity>100:
                     sensitivity=sensitivity-50
-            elif controller.up:
-                throttle=auto_take_off_throttle
-                console_messege="Auto Take Off"
-                console_messege_timer_start =  time.time()
-            elif controller.down or auto_land==1:
-                if throttle>1400:
-                    auto_land=1
-                    throttle = throttle - 5
-                else:
-                    time.sleep(1)
-                    auto_land=0
-                console_messege="Auto Land"
-                console_messege_timer_start =  time.time()
             else:
                 pitch=int(controller.a_joystick_right_y*((-1)*sensitivity)+1500)
                 roll=int(controller.a_joystick_right_x*sensitivity+1500)
