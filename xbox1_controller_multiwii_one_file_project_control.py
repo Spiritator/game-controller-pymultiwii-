@@ -4,7 +4,9 @@ Created on Thu Dec 21 14:13:52 2017
 
 @author: 蔡永聿
 """
-
+#This is a code for using xbox1 controller through pygame and pymultiwii to control multiwii system drone.
+#This code using our own way to control the drone check out 
+#For American Hand control see another code in the same repository file folder
 import pygame,time,datetime,csv
 from pymultiwii import MultiWii
 
@@ -171,6 +173,7 @@ if __name__ == "__main__":
     console_messege_timer_start=0
     auto_land=0
     
+    #log ditionary for recording control signal(optional can be commented)
     control_signal_log={}
     control_signal_log_timer_start=time.time()
     
@@ -203,7 +206,6 @@ if __name__ == "__main__":
                 console_messege_timer_start =  time.time()
             elif controller.Y:
                 done=True        	
-            #example of 4 RC channels to be send
             elif controller.X:
                 pitch=1500
                 roll=1500
@@ -229,17 +231,6 @@ if __name__ == "__main__":
                 console_messege="Auto Land"
                 console_messege_timer_start =  time.time()
             else:
-                '''Control Method of Project'''
-#                rotate=int(controller.a_joystick_right_x*sensitivity+1500)
-#                pitch=int(controller.a_joystick_right_y*((-1)*sensitivity)+1500)
-#                roll=int(controller.a_trigger*((-1)*sensitivity)+1500)
-#                if abs(controller.a_joystick_left_y)>=0.1 and throttle>=1000 and throttle<=2000:
-#                    throttle=throttle+int(controller.a_joystick_left_y*(-5))
-#                elif throttle>2000:
-#                    throttle=2000
-#                elif throttle<1000:
-#                    throttle=1000
-                '''American Hand(project version)'''
                 roll=int(controller.a_joystick_right_x*sensitivity+1500)
                 pitch=int(controller.a_joystick_right_y*((-1)*sensitivity)+1500)
                 rotate=int(controller.a_trigger*((-1)*sensitivity)+1500)
@@ -255,6 +246,7 @@ if __name__ == "__main__":
             data = [roll,pitch,rotate,throttle]
             butterfly.sendCMD(8,MultiWii.SET_RAW_RC,data)        
             
+	    #print control signal to pygame control panel
             textPrint.print(screen, "Console Messege: {}".format(console_messege) )
 
             textPrint.print(screen, " {}".format(" ") )
@@ -273,11 +265,11 @@ if __name__ == "__main__":
             # Go ahead and update the screen with what we've drawn.
             pygame.display.flip()
             
-            #recording flight control signal
+            #recording flight control signal(optional can be commented)
             if throttle!=1000:
                 control_signal_log["%.2f" % (time.time()-control_signal_log_timer_start)]=data
         
-            # Limit to 20 frames per second
+            # Limit to 20 frames per second(control frequency)
             clock.tick(20)
             
     except Exception as error:
@@ -294,6 +286,7 @@ if __name__ == "__main__":
 # on exit if running from IDLE.
 pygame.quit ()
 
+'''writing flying signal into a csv file, this is optional can be commented'''
 if len(control_signal_log)>0:
     file_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     
