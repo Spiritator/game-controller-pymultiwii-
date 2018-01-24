@@ -4,7 +4,9 @@ Created on Thu Dec 21 14:13:52 2017
 
 @author: 蔡永聿
 """
-
+#This is a code for using logitech F310 game controller through pygame and pymultiwii to control multiwii system drone.
+#This code using our own way to control the drone check out 
+#For American Hand control see another code in the same repository file folder
 import pygame,time,datetime,csv
 from pymultiwii import MultiWii
 
