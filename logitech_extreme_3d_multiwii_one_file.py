@@ -4,7 +4,7 @@ Created on Thu Dec 21 14:13:52 2017
 
 @author: 蔡永聿
 """
-
+#This is a code for using logitech extreme 3D game controller through pygame and pymultiwii to control multiwii system drone.
 import pygame,time,datetime,csv
 from pymultiwii import MultiWii
 
