@@ -10,6 +10,8 @@ Created on Thu Dec 21 14:13:52 2017
 import pygame,time,datetime,csv
 from pymultiwii import MultiWii
 
+auto_take_off_throttle=1550
+
 # This is a simple class that will help us print to the screen
 # It has nothing to do with the joysticks, just outputting the
 # information.
@@ -134,7 +136,7 @@ if __name__ == "__main__":
                 if sensitivity>100:
                     sensitivity=sensitivity-50
             elif controller.get_hat(0)[1]==1:
-                throttle=1600
+                throttle=auto_take_off_throttle
                 console_messege="Auto Take Off"
                 console_messege_timer_start =  time.time()
             elif controller.get_hat(0)[1]==-1 or auto_land==1:
