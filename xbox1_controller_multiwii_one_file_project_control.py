@@ -36,6 +36,7 @@ class TextPrint:
     def unindent(self):
         self.x -= 10
 
+#class for access button name easily
 class xbox1:
 	joystick=0
 	joystick_count=0
@@ -124,7 +125,7 @@ class xbox1:
 		pygame.event.get()
 		return button_analog
     
-#def pygame_init():
+#initialize pygame
 pygame.init()
  
 # Used to manage how fast the screen updates
@@ -154,7 +155,7 @@ if __name__ == "__main__":
     screen.fill(WHITE)
     textPrint.reset()
 
-    
+    #bluetooth connect to drone's COM
     butterfly = MultiWii("COM5")
     print("Butterfly Connected")
     time.sleep(1)
@@ -164,7 +165,8 @@ if __name__ == "__main__":
     sensitivity=200 #max 500
     print('Default Sensitivity : %d' % sensitivity)
     time.sleep(1)
-
+    
+    #initial control signal
     roll=1500
     pitch=1500
     rotate=1500
@@ -197,7 +199,9 @@ if __name__ == "__main__":
             
             if time.time() - console_messege_timer_start > 2:
                 console_messege=" "
-                
+            
+	    #control method
+	    #access button
             if controller.B:
                 butterfly.arm()
                 console_messege="Armed."
@@ -233,6 +237,7 @@ if __name__ == "__main__":
                 console_messege="Auto Land"
                 console_messege_timer_start =  time.time()
             else:
+		#access analog joysticks
                 roll=int(controller.a_joystick_right_x*sensitivity+1500)
                 pitch=int(controller.a_joystick_right_y*((-1)*sensitivity)+1500)
                 rotate=int(controller.a_trigger*((-1)*sensitivity)+1500)
@@ -244,7 +249,7 @@ if __name__ == "__main__":
                     throttle=1000
 
                 
-                
+            #send control signal    
             data = [roll,pitch,rotate,throttle]
             butterfly.sendCMD(8,MultiWii.SET_RAW_RC,data)        
             
