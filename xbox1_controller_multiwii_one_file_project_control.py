@@ -178,7 +178,7 @@ if __name__ == "__main__":
     auto_land=0
     
     #log ditionary for recording control signal(optional can be commented)
-    control_signal_log={}
+#    control_signal_log={}
     control_signal_log_timer_start=time.time()
     
     try:
@@ -273,8 +273,8 @@ if __name__ == "__main__":
             pygame.display.flip()
             
             #recording flight control signal(optional can be commented)
-            if throttle!=1000:
-                control_signal_log["%.2f" % (time.time()-control_signal_log_timer_start)]=data
+#            if throttle!=1000:
+#                control_signal_log["%.2f" % (time.time()-control_signal_log_timer_start)]=data
         
             # Limit to 20 frames per second(control frequency)
             clock.tick(20)
@@ -294,14 +294,14 @@ if __name__ == "__main__":
 pygame.quit ()
 
 '''writing flying signal into a csv file, this is optional can be commented'''
-if len(control_signal_log)>0:
-    file_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    
-    with open('control_signal_log/'+file_name+'.csv', 'w', newline='') as csvfile:
-        fieldnames=['time','roll','pitch','rotate','throttle']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    
-        writer.writeheader()
-        for item in control_signal_log:
-            writer.writerow({'time':item,'pitch':control_signal_log[item][0],'roll':control_signal_log[item][1],'rotate':control_signal_log[item][2],'throttle':control_signal_log[item][3]})
+#if len(control_signal_log)>0:
+#    file_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+#    
+#    with open('control_signal_log/'+file_name+'.csv', 'w', newline='') as csvfile:
+#        fieldnames=['time','roll','pitch','rotate','throttle']
+#        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+#    
+#        writer.writeheader()
+#        for item in control_signal_log:
+#            writer.writerow({'time':item,'pitch':control_signal_log[item][0],'roll':control_signal_log[item][1],'rotate':control_signal_log[item][2],'throttle':control_signal_log[item][3]})
         

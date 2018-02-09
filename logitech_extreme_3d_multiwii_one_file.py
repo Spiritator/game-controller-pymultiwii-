@@ -87,7 +87,7 @@ if __name__ == "__main__":
     console_messege_timer_start=0
     auto_land=0
     
-    control_signal_log={}
+#    control_signal_log={}
     control_signal_log_timer_start=time.time()
     
     try:
@@ -153,8 +153,8 @@ if __name__ == "__main__":
             pygame.display.flip()
             
             #recording flight control signal
-            if throttle!=1000:
-                control_signal_log["%.2f" % (time.time()-control_signal_log_timer_start)]=data
+#            if throttle!=1000:
+#                control_signal_log["%.2f" % (time.time()-control_signal_log_timer_start)]=data
         
             # Limit to 20 frames per second
             clock.tick(20)
@@ -173,14 +173,14 @@ if __name__ == "__main__":
 # on exit if running from IDLE.
 pygame.quit ()
 
-if len(control_signal_log>0):
-    file_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    
-    with open('control_signal_log/'+file_name+'.csv', 'w', newline='') as csvfile:
-        fieldnames=['time','roll','pitch','rotate','throttle']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    
-        writer.writeheader()
-        for item in control_signal_log:
-            writer.writerow({'time':item,'pitch':control_signal_log[item][0],'roll':control_signal_log[item][1],'rotate':control_signal_log[item][2],'throttle':control_signal_log[item][3]})
-        
+#if len(control_signal_log>0):
+#    file_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+#    
+#    with open('control_signal_log/'+file_name+'.csv', 'w', newline='') as csvfile:
+#        fieldnames=['time','roll','pitch','rotate','throttle']
+#        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+#    
+#        writer.writeheader()
+#        for item in control_signal_log:
+#            writer.writerow({'time':item,'pitch':control_signal_log[item][0],'roll':control_signal_log[item][1],'rotate':control_signal_log[item][2],'throttle':control_signal_log[item][3]})
+#        
