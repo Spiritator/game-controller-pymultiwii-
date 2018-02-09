@@ -182,7 +182,7 @@ if __name__ == "__main__":
     control_signal_log={}
     control_signal_log_timer_start=time.time()
     
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     
     try:
         # -------- Main Program Loop -----------
@@ -203,6 +203,7 @@ if __name__ == "__main__":
             
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame = np.rot90(frame)
+            frame = np.flip(frame,axis=0)
             frame = pygame.surfarray.make_surface(frame)
             screen.blit(frame, (600,100))
                          
