@@ -14,7 +14,7 @@ auto_take_off_throttle=1550
 
 # This is a simple class that will help us print to the screen
 # It has nothing to do with the joysticks, just outputting the
-# information.
+# information. 
 class TextPrint:
     def __init__(self):
         self.reset()
